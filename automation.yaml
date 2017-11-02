@@ -1,0 +1,112 @@
+- action:
+  - data:
+      brightness: '30'
+      color_name: blue
+    service: light.turn_on
+  alias: New Automation2
+  condition: []
+  id: '1509607855620'
+  trigger:
+  - above: '2700'
+    below: '2800'
+    entity_id: sensor.price
+    platform: numeric_state
+- action:
+  - data:
+      brightness: '30'
+      color_name: cyan
+    service: light.turn_on
+  alias: New Automation1
+  condition: []
+  id: '1509608328824'
+  trigger:
+  - above: '2800'
+    below: '2900'
+    entity_id: sensor.price  
+    platform: numeric_state
+- action:
+  - data:
+      brightness: '30'
+      color_name: green
+    service: light.turn_on
+      color_name: cyan
+    service: light.turn_on
+  alias: New Automation1
+  condition: []
+  id: '1509608328824'
+  trigger:
+  - above: '2800'
+    below: '2900'
+    entity_id: sensor.price
+    platform: numeric_state
+- action:
+  - data:
+      brightness: '30'
+      color_name: green
+    service: light.turn_on
+  alias: New Automation3
+  condition: []
+  id: '1509608470407'
+  trigger:
+  - above: '2900'
+    below: '3000'
+    entity_id: sensor.price
+    platform: numeric_state
+- action:
+  - data:
+      brightness: '30'
+      color_name: orange
+    service: light.turn_on
+  alias: New Automation4
+  condition: []
+  id: '1509608535989'
+    condition: []
+  id: '1509608470407'
+  trigger:
+  - above: '2900'
+    below: '3000'
+    entity_id: sensor.price
+    platform: numeric_state
+- action:
+  - data:
+      brightness: '30'
+      color_name: orange
+    service: light.turn_on
+  alias: New Automation4
+  condition: []
+  id: '1509608535989'
+  trigger:
+  - above: '3000'
+    below: '3100'
+    entity_id: sensor.price
+    platform: numeric_state
+- action:
+  - data:
+      brightness: '30'
+      color_name: red
+    service: light.turn_on
+  alias: New Automation5
+  condition: []
+  id: '1509608576610'
+  trigger:
+  - above: '3100'
+    below: '3200'
+      - above: '3000'
+    below: '3100'
+    entity_id: sensor.price
+    platform: numeric_state
+- action:
+  - data:
+      brightness: '30'
+      color_name: red
+    service: light.turn_on
+  alias: New Automation5
+  condition: []
+  id: '1509608576610'
+  trigger:
+  - above: '3100'
+    below: '3200'
+    entity_id: sensor.price
+    platform: numeric_state
+
+
