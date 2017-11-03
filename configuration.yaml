@@ -1,2 +1,2 @@
 sensor:
-  - platform: demo
+  - platform: pricesensor
