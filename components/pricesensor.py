@@ -32,5 +32,5 @@ class HAChinaPriceSensor(Entity):
         req= requests.get(url)
         tree = etree.HTML(req.text)
         data = tree.xpath('//*[@id="J_StrPrice"]/em[2]/text()')
-        self._state = str(data)
+        self._state = str(data[0])
     
