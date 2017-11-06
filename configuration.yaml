@@ -1,2 +1,3 @@
 sensor:
   - platform: pricesensor
+      url：#淘宝平台上商品网页
