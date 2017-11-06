@@ -91,7 +91,7 @@ class HAChinaPriceSensor(Entity):
     def update(self):               #更新传感器状态
         import requests
         import re
-        req = requests.get('self._url')
+        req = requests.get(self._url)
         data = re.findall('"tm-count">(.*?)</span>',req.text,re.S) 
         self._state=str(re.findall('\d+',str(data))[0])
 
