@@ -29,7 +29,7 @@ class HAChinaPriceSensor(Entity):
     def __init__(self,config):          #初始化传感器实体
         self._object_id = 'pricesensor'
         self._state = 0
-self._url = config['url']
+        self._url = config['url']
         self._unit_of_measurement='￥'
     @property
     def unit_of_measurement(self):       #用于呈现传感器符号
