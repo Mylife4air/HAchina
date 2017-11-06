@@ -27,11 +27,10 @@ class HAChinaPriceSensor(Entity):
         return self._state
     def update(self):               #更新传感器状态
         import requests
-        import re        
-        “”“获取商品价格”“”
-        r = requests.get(
-            'https://p.3.cn/prices/mgets?callback=jQuery5614231&type=1&area=1_72_2799_0&pdtk=mYRfHvynjZowefXscI7IeQSCZxlXRmwWV1jTlcCA44vgU8icXTSBSO2FPFke$
-        str1 = re.findall("\"p\":\".*\"", r.text)[0]
-        str1 = re.findall('[1-9]\d*\.\d*|0\.\d*[1-9]\d*', str1)
-        self._state = float(str1[0])
+        from lxml import etree
+        url ='https://item.taobao.com/item.htm?scm=1007.12493.92624.100200300000005&id=549816031459&pvid=ccf56d0c-3737-4863-ab35-206b76d014d3'
+        req= requests.get(url)
+        tree = etree.HTML(req.text)
+        data = tree.xpath('//*[@id="J_StrPrice"]/em[2]/text()')
+        self._state = str(data)
     
