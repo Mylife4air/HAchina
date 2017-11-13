@@ -47,21 +47,6 @@ class HAChinaPriceSensor(Entity):
     @property
     def state(self):                   #用于呈现传感器状态
         return self._state
-    def update(self):               #更新传感器状态
-        import requests
-        import re
-        req = requests.get(self._url)
-        data = re.findall('"tm-count">(.*?)</span>',req.text,re.S)
-        self._unit_of_measurement='￥'
-    @property
-    def unit_of_measurement(self):       #用于呈现传感器符号
-        return self._unit_of_measurement
-    @property
-    def name(self):                       #用于呈现传感器名字
-        return self._object_id
-    @property
-    def state(self):                   #用于呈现传感器状态
-        return self._state
 
     @asyncio.coroutine
     def async_update(self):               #异步更新传感器状态
