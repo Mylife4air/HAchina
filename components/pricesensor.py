@@ -48,13 +48,14 @@ class HAChinaPriceSensor(Entity):
     def state(self):                   #用于呈现传感器状态
         return self._state
 
-    @asyncio.coroutine
+     @asyncio.coroutine
     def async_update(self):               #异步更新传感器状态
         import re
-        resp = yield from aiohttp.request('GET',self._url)
+        session = async_get_clientsession(self._hass)
+        resp = yield from session.get(self._url)
         result = yield from resp.read()
-        if self._url[-6: ]=='detail':
-            data = re.findall('"tb-rmb-num">\d+', str(result), re.S)
+        if self._url[13:16]=='tao':
+            data = re.findall('"tb-rmb-num">\d+</em>', str(result), re.S)
             self._state = str(re.findall('\d+', str(data))[0])
         elif self._url[15:17] =='tm':
             data = re.findall('"price":"(.*?)","priceCent', str(result), re.S)
