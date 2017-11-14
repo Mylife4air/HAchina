@@ -1,11 +1,8 @@
-- alias: taobaoprice
+- alias: haha
   trigger:
-    platform: numeric_state
-    entity_id: sensor.pricesensor
-    below: '2500'
-  condition: []
+    platform: state
+    entity_id: sensor.happysensor
   action:
-    service: notify.my_email
-    data:
-      title: "降价了"
-      message: "您关注的商品已经降到指定价格以下了"
+    service: tts.baidu_say
+    data_template:
+message: '{{ trigger.to_state.state }}'
