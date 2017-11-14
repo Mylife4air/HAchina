@@ -1,0 +1,3 @@
+sensor:
+  - platform: pricesensor
+      url： #淘宝平台商品的网页地址
