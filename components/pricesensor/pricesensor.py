@@ -56,4 +56,4 @@ class HAChinaPriceSensor(Entity):
             self._state = str(re.findall('\d+', str(data))[0])
         elif self._url[15:17] =='tm':
             data = re.findall('"price":"(.*?)","priceCent', str(result), re.S)
-self._state = str(re.findall('\d+', str(data))[0])
+            self._state = str(re.findall('\d+', str(data))[0])
