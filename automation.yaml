@@ -9,3 +9,11 @@
     data:
       title: "降价了"
       message: "您关注的商品已经降到指定价格以下了"
+- alias: haha
+  trigger:
+    platform: state
+    entity_id: sensor.happysensor
+  action:
+    service: tts.baidu_say
+    data_template:
+      message: '{{ trigger.to_state.state }}'
