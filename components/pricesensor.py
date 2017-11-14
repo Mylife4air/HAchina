@@ -26,10 +26,10 @@ CONFIG_SCHEMA = vol.Schema(
     },
     extra=vol.ALLOW_EXTRA)
 
-@asyncio.coroutine
-def async_setup_platform(hass, config, async_add_devices, discovery_info=None):   #异步在homeassistant注册实体
+def setup_platform(hass, config, add_devices, discovery_info=None):   #异步在ho$
     _LOGGER.info("setup platform sensor.hachina...")
-    async_add_devices([HAChinaPriceSensor(hass,config)])
+    add_devices([HAChinaPriceSensor(hass,config)])
+
 
 class HAChinaPriceSensor(Entity):
     def __init__(self,hass,config):          #初始化传感器实体
@@ -48,15 +48,16 @@ class HAChinaPriceSensor(Entity):
     def state(self):                   #用于呈现传感器状态
         return self._state
 
-     @asyncio.coroutine
+    @asyncio.coroutine
     def async_update(self):               #异步更新传感器状态
         import re
         session = async_get_clientsession(self._hass)
         resp = yield from session.get(self._url)
         result = yield from resp.read()
         if self._url[13:16]=='tao':
-            data = re.findall('"tb-rmb-num">\d+</em>', str(result), re.S)
+            data = re.findall('"tb-rmb-num">(.*?)</em>', str(result), re.S)
             self._state = str(re.findall('\d+', str(data))[0])
         elif self._url[15:17] =='tm':
             data = re.findall('"price":"(.*?)","priceCent', str(result), re.S)
             self._state = str(re.findall('\d+', str(data))[0])
+
