@@ -26,7 +26,7 @@ CONFIG_SCHEMA = vol.Schema(
     },
     extra=vol.ALLOW_EXTRA)
 
-def setup_platform(hass, config, add_devices, discovery_info=None):   #异步在ho$
+def setup_platform(hass, config, add_devices, discovery_info=None):   #加载实体
     _LOGGER.info("setup platform sensor.hachina...")
     add_devices([HAChinaPriceSensor(hass,config)])
 
