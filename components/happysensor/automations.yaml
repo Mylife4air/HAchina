@@ -5,4 +5,4 @@
   action:
     service: tts.baidu_say
     data_template:
-message: '{{ trigger.to_state.state }}'
+      message: '{{ trigger.to_state.state }}'
