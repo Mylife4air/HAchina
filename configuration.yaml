@@ -1,3 +1,6 @@
 sensor:
   - platform: pricesensor
-      url：#淘宝平台上商品网页
+      url： #淘宝平台商品的网页地址
+  - platform: gaode_travel_time
+    api_key: #从极速数据获取笑话大全的appkeyhttps: //www.jisuapi.com/
+
