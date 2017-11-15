@@ -1,8 +1,16 @@
-- alias: haha
+- alias: update
+  trigger:
+    platform: time
+    seconds: /50
+  action:
+    service: happysensor.happy_update
+    data_template:
+      message: ''
+- alias: say
   trigger:
     platform: state
     entity_id: sensor.happysensor
   action:
     service: tts.baidu_say
     data_template:
-      message: '{{ trigger.to_state.state }}'
+      message:  '{{ trigger.to_state.state }}'
