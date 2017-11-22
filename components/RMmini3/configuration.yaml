@@ -1,0 +1,3 @@
+- platform: RMmini3
+  mac: xxxxxxxx             #mac地址
+  host: xxxxxxx             # ip地址
