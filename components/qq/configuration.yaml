@@ -1,0 +1,4 @@
+sensor:
+- platform: qq
+  qq: xxxxxxxxx     #你的小号
+  scan_interval: 5    #更新界面传感器的速率
