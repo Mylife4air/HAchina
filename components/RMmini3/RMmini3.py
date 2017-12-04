@@ -1,14 +1,18 @@
 """
 支持博联RMmini3智能遥控器组件
 """
-from homeassistant.helpers.entity import Entity
 import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
 import broadlink
 import os
 import time
+
+from homeassistant.helpers.entity import Entity
+
+
+REQUIREMENTS = ['broadlink==0.6']
 DOMAIN = 'RMmini3'
-type1 = 0x2737
+type = 0x2737
 path = os.path.expanduser('~')+'/.homeassistant/learn'
 # 配置文件的样式
 CONFIG_SCHEMA = vol.Schema(
@@ -22,11 +26,11 @@ CONFIG_SCHEMA = vol.Schema(
     extra=vol.ALLOW_EXTRA)
 
 
-def setup_platform(hass, config, add_devices):
-    """装载实体"""
+def setup_platform(hass, config, add_devices, discovery_info=None):
+    """装载实体."""
     host = config['host']
     mac = bytearray.fromhex(config['mac'])
-    dev = broadlink.gendevice(type1, (host, 80), mac)
+    dev = broadlink.gendevice(type, (host, 80), mac)
     o = Rmmin3(hass, dev)
     add_devices([o])
 
@@ -34,17 +38,17 @@ def setup_platform(hass, config, add_devices):
 class Rmmin3(Entity):
     """创建RMmini3类."""
 
-    def __init__(self, ha, dev):
-        """初始化并注册学习服务和发送服务"""
+    def __init__(self, hass, dev):
+        """初始化."""
         self._state = '未知'
-        self._ha = ha
+        self._hass = hass
         self._dev = dev
         self._name = DOMAIN
-        self._message = ''
         self._unit_of_measurement = '度'
-        self._hass.services.register(DOMAIN, 'send', self.send)
-        self._hass.services.register(DOMAIN, 'learn', self.learn)
-
+        # 注册学习服务和发送服务
+        hass.services.register(DOMAIN, 'send', self.send)   
+        hass.services.register(DOMAIN, 'learn', self.learn)
+    
     @property
     def should_poll(self):
         """需要更新温度"""
@@ -70,18 +74,19 @@ class Rmmin3(Entity):
         self._dev.auth()
         self._state = self._dev.check_temperature()
 
-    def send(self, data):
+    def send(self, data):   
         """发送红外信息"""
         self._dev.auth()
         with open(path, 'r') as fs:
             for line in fs:
                 if line[:line.index(':')] == str(data.data['send']):
                     date = line[line.index(':') + 1:line.index('。')]
+                    print(date)
                     date = bytearray.fromhex(date)
                     self._dev.send_data(date)
                     break
-
-    def learn(self, date):
+ 
+    def learn(self, date):          
         """学习红外信息"""
         self._dev.auth()
         self._dev.enter_learning()
